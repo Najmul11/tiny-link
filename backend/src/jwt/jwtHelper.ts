@@ -1,9 +1,8 @@
 /* eslint-disable no-console */
-import jwt, { JwtPayload, Secret } from "jsonwebtoken";
-import config from "../config";
-import { TTokenOptons } from "./jwt.interface";
-import { TUser } from "../modules/user/user.interface";
-import { redis } from "../server";
+import jwt, { JwtPayload, Secret } from 'jsonwebtoken';
+import config from '../config';
+import { TTokenOptons } from './jwt.interface';
+import { TUser } from '../app/modules/user/user.interface';
 
 const createOption = (tokenExpire: number) => {
   return {
@@ -11,7 +10,7 @@ const createOption = (tokenExpire: number) => {
     maxAge: tokenExpire * 1000 * 60 * 60 * 24,
     httpOnly: true,
     // development sameSite "lax", production "none"
-    sameSite: "none",
+    sameSite: 'none',
     // secure true in production
     secure: true,
   };
@@ -20,23 +19,21 @@ const createOption = (tokenExpire: number) => {
 const createToken = (
   payload: Record<string, unknown>,
   secret: Secret,
-  expireTime: string
+  expireTime: string,
 ): string => {
   return jwt.sign(payload, secret, { expiresIn: expireTime });
 };
 
 const sendToken = async (user: TUser) => {
-  await redis.set(user._id as string, JSON.stringify(user));
-
   const accessToken = createToken(
     { id: user._id },
     config.jwt.secret as Secret,
-    config.jwt.expires_in as string
+    config.jwt.expires_in as string,
   );
   const refreshToken = createToken(
     { id: user._id },
     config.jwt.refresh_secret as Secret,
-    config.jwt.refresh_expires_in as string
+    config.jwt.refresh_expires_in as string,
   );
 
   const cookieExpire = Number(config.cookie.access_expire);
@@ -45,7 +42,7 @@ const sendToken = async (user: TUser) => {
   const accessTokenOptions: TTokenOptons = createOption(cookieExpire);
   const refreshTokenOptions: TTokenOptons = createOption(cookieRefreshExpire);
 
-  if (config.env === "production") accessTokenOptions.secure = true;
+  if (config.env === 'production') accessTokenOptions.secure = true;
 
   return {
     accessTokenOptions,
