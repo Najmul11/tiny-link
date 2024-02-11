@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { shortUrlHelper } from '../../../utils/short-url';
 import { TLink } from './links.interface';
 import { Link } from './links.model';
@@ -19,6 +18,19 @@ const createLink = async (payload: TLink, user: string) => {
   return result;
 };
 
+const deleteURL = async (id: string) => {
+  const result = await Link.findByIdAndDelete(id);
+  return result;
+};
+
+// get user specific urls
+const userURLs = async (userId: string) => {
+  const result = await Link.find({ user: userId }).sort({ createdAt: -1 });
+  return result;
+};
+
 export const LinkService = {
   createLink,
+  deleteURL,
+  userURLs,
 };
