@@ -2,11 +2,11 @@ import { Schema, model } from 'mongoose';
 import { LinkModel, TLink } from './links.interface';
 
 const LinkSchema = new Schema<TLink, Record<string, unknown>>({
-  originalURL: {
+  originalLink: {
     type: String,
     required: true,
   },
-  shortURL: {
+  shortLink: {
     type: String,
     required: true,
     unique: true,

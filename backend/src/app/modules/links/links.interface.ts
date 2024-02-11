@@ -1,8 +1,8 @@
 import { Model, Types } from 'mongoose';
 
 export type TLink = {
-  originalURL: string;
-  shortURL: string;
+  originalLink: string;
+  shortLink: string;
   user: Types.ObjectId;
 };
 

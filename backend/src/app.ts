@@ -4,6 +4,7 @@ import httpStatus from 'http-status';
 import config from './config';
 import globalErrorhandler from './app/middlewares/globalErrorHandler';
 import { routes } from './app/routes';
+import { RedirectRoutes } from './app/modules/redirect/redirect.routes';
 
 const app: Application = express();
 
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/v1', routes);
+app.use('/', RedirectRoutes);
 
 // middleware
 app.use(globalErrorhandler);
