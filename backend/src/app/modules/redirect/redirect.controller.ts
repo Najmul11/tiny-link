@@ -9,12 +9,16 @@ const redirectToOriginalLink = catchAsyncError(
     const { shortLink } = req.params;
 
     const result = await RedirectService.redirectToOriginalLink(shortLink);
-    sendResponse(res, {
-      statusCode: httpStatus.OK,
-      success: true,
-      message: 'Redirected successfully',
-      data: result,
-    });
+    if (result) {
+      res.redirect(result);
+    } else {
+      sendResponse(res, {
+        statusCode: httpStatus.NOT_FOUND,
+        success: false,
+        message: 'Original link not found',
+        data: null,
+      });
+    }
   },
 );
 
