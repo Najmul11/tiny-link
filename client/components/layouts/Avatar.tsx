@@ -15,7 +15,7 @@ export function Avatar() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size={"sm"} className="flex gap-5">
+        <Button variant="outline" size={"sm"} className="flex gap-5 text-black">
           Najmul <ChevronsUpDown size={15} className="text-gray-500" />
         </Button>
       </DropdownMenuTrigger>
