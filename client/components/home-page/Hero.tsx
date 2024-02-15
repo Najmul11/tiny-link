@@ -8,7 +8,7 @@ const Hero = () => {
       <div className="absolute pointer-events-none inset-0 flex items-center justify-center  bg-black [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
 
       <div className="flex flex-col  text-center items-center w-1/3 mx-auto">
-        <span className="text-sm text-[#7CDBE9] bg-[#294358]/60 px-5 py-1 rounded-full">
+        <span className="text-sm text-[#7CDBE9]/80 bg-[#294358]/60 px-5 py-1 rounded-full">
           No credit card required.
         </span>
 
