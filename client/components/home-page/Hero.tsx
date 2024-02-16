@@ -3,7 +3,7 @@ import { Button } from "../ui/moving-border";
 
 const Hero = () => {
   return (
-    <div className="h-[50rem] w-full   bg-grid-gray-900 relative flex pt-[28vh] justify-center">
+    <div className="h-[50rem] w-full   bg-grid-gray-800 relative flex pt-[28vh] justify-center">
       {/* Radial gradient for the container to give a faded look */}
       <div className="absolute pointer-events-none inset-0 flex items-center justify-center  bg-black [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
 
