@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layouts/Header";
 import Footer from "@/components/layouts/Footer";
+import ReduxProvider from "./ReduxProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,12 +18,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <Header />
-        <main className="bg-black text-white min-h-screen">{children}</main>
-        <Footer />
-      </body>
-    </html>
+    <ReduxProvider>
+      <html lang="en">
+        <body className={inter.className}>
+          <Header />
+          <main className="bg-black text-white min-h-screen">{children}</main>
+          <Footer />
+        </body>
+      </html>
+    </ReduxProvider>
   );
 }
