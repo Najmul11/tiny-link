@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "../ui/moving-border";
+import Link from "next/link";
 
 const Hero = () => {
   return (
@@ -19,14 +20,16 @@ const Hero = () => {
           Shorten links using NanoLink super fast. NanoLink is a oneclick paste
           and copy URL shortener which alows you to shorten links lighting fast
         </p>
-        <Button
-          borderRadius="0.5rem"
-          duration={8000}
-          containerClassName="h-12 w-72 mt-10 hover:scale-105 duration-300"
-          className="   bg-slate-900 text-white/80 "
-        >
-          Start Shortening for free
-        </Button>
+        <Link href={"/create-link"}>
+          <Button
+            borderRadius="0.5rem"
+            duration={8000}
+            containerClassName="h-12 w-72 mt-10 hover:scale-105 duration-300"
+            className="   bg-slate-900 text-white/80 "
+          >
+            Start Shortening for free
+          </Button>
+        </Link>
       </div>
     </div>
   );
