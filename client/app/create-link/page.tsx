@@ -1,3 +1,4 @@
+import AllLinks from "@/components/create-link/AllLinks";
 import CreateLink from "@/components/create-link/CreateLink";
 import CreatedLink from "@/components/create-link/CreatedLink";
 
@@ -10,7 +11,9 @@ const CreateLinkPage = () => {
           <CreatedLink />
         </div>
 
-        <div className="col-span-2">hello</div>
+        <div className="col-span-2">
+          <AllLinks />
+        </div>
       </div>
     </div>
   );
