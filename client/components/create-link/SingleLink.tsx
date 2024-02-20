@@ -21,7 +21,7 @@ const SingleLink = ({ link }: TProps) => {
       </div>
 
       <div className="flex items-center justify-between">
-        <span>Exp: 11 Jan,2024</span>
+        <span className="text-white/80">Exp: 11 Jan,2024</span>
 
         <div className="flex items-center gap-5">
           <button>
