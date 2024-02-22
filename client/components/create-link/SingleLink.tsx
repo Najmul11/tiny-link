@@ -1,5 +1,7 @@
 import { Copy, Pencil, Trash2 } from "lucide-react";
 import Link from "next/link";
+import { Dialog, DialogTrigger } from "../ui/dialog";
+import EditDialog from "./EditDialog";
 
 type TProps = {
   link: {
@@ -23,12 +25,17 @@ const SingleLink = ({ link }: TProps) => {
       <div className="flex items-center justify-between">
         <span className="text-white/80">Exp: 11 Jan,2024</span>
 
-        <div className="flex items-center gap-5">
-          <button>
-            <Pencil size={18} />
-          </button>
+        <div className="flex items-center gap-2">
+          <Dialog>
+            <DialogTrigger>
+              <button className="p-2  hover:bg-slate-700 duration-300 rounded-md">
+                <Pencil size={18} />
+              </button>
+            </DialogTrigger>
+            <EditDialog />
+          </Dialog>
 
-          <button>
+          <button className="p-2 bg-slate-800 hover:bg-slate-700 duration-300 rounded-md">
             <Trash2
               size={18}
               className="text-red-500 hover:text-red-600 duration-300"

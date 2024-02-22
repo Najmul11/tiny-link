@@ -16,7 +16,9 @@ const AllLinks = () => {
   ];
   return (
     <div className="flex flex-col gap-3">
-      <h2 className="text-2xl text-center  font-semibold">All links</h2>
+      <h2 className="text-2xl text-center bg-slate-900 py-[6px] rounded-md  font-semibold">
+        All links
+      </h2>
 
       <LinkSkeleton />
       <div className="p-5 rounded-md bg-slate-900 ">

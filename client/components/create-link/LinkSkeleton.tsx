@@ -13,3 +13,11 @@ const LinkSkeleton = () => {
 };
 
 export default LinkSkeleton;
+
+export const ShortLinkSkeleton = () => {
+  return (
+    <div>
+      <Skeleton className="h-5 bg-slate-700 rounded-md" />
+    </div>
+  );
+};
