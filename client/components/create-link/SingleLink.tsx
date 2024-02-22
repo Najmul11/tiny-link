@@ -12,7 +12,7 @@ type TProps = {
 const SingleLink = ({ link }: TProps) => {
   const { shortLink } = link;
   return (
-    <div className="bg-slate-900 p-5 rounded-md flex flex-col gap-3">
+    <div className="bg-slate-900 p-5 rounded-md flex flex-col gap-2">
       <div className="flex gap-5 justify-between items-center">
         <Link href={"/"} className="w-[]">
           {shortLink}
@@ -21,9 +21,10 @@ const SingleLink = ({ link }: TProps) => {
           <Copy size={18} />
         </button>
       </div>
+      <p className="text-sm text-white/80">Clicks: 20</p>
 
       <div className="flex items-center justify-between">
-        <span className="text-white/80">Exp: 11 Jan,2024</span>
+        <span className="text-white/80 text-sm">Exp: 11 Jan,2024</span>
 
         <div className="flex items-center gap-2">
           <Dialog>
