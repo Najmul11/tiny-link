@@ -27,7 +27,7 @@ const SingleLink = ({ link }: TProps) => {
 
         <div className="flex items-center gap-2">
           <Dialog>
-            <DialogTrigger>
+            <DialogTrigger asChild>
               <button className="p-2  hover:bg-slate-700 duration-300 rounded-md">
                 <Pencil size={18} />
               </button>

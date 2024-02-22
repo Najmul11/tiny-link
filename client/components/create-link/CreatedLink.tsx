@@ -15,7 +15,6 @@ const CreatedLink = () => {
       </div>
       <div className="w-72 mx-auto">
         <ShortLinkSkeleton />
-        <DatePicker />
       </div>
     </>
   );
