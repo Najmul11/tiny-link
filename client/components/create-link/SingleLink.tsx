@@ -1,7 +1,9 @@
-import { Copy, Pencil, Trash2 } from "lucide-react";
+"use client";
+import { CheckSquare2, Copy, Pencil, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { Dialog, DialogTrigger } from "../ui/dialog";
 import EditDialog from "./EditDialog";
+import { useState } from "react";
 
 type TProps = {
   link: {
@@ -10,6 +12,16 @@ type TProps = {
 };
 
 const SingleLink = ({ link }: TProps) => {
+  const [showCheckmark, setShowCheckmark] = useState(false);
+
+  const handleClick = () => {
+    if (!showCheckmark) {
+      setShowCheckmark(true);
+      setTimeout(() => {
+        setShowCheckmark(false);
+      }, 3000);
+    }
+  };
   const { shortLink } = link;
   return (
     <div className="bg-slate-900 p-5 rounded-md flex flex-col gap-2">
@@ -17,9 +29,19 @@ const SingleLink = ({ link }: TProps) => {
         <Link href={"/"} className="w-[]">
           {shortLink}
         </Link>
-        <button className="hover:bg-slate-800 p-2 duration-300 rounded-md">
-          <Copy size={18} />
-        </button>
+
+        {showCheckmark ? (
+          <button className="hover:bg-slate-800 p-2 duration-300 rounded-md">
+            <CheckSquare2 size={18} />
+          </button>
+        ) : (
+          <button
+            onClick={handleClick}
+            className="hover:bg-slate-800 p-2 duration-300 rounded-md"
+          >
+            <Copy size={18} />
+          </button>
+        )}
       </div>
       <p className="text-sm text-white/80">Clicks: 20</p>
 

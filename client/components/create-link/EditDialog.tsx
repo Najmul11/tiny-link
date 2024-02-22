@@ -28,7 +28,10 @@ const EditDialog = () => {
             <Button variant={"ghost"} className="hover:bg-red-200 text-red-500">
               cancel
             </Button>
-            <Button className="bg-slate-700">Save</Button>
+
+            <Button variant="outline" className="text-black">
+              Save
+            </Button>
           </div>
         </DialogDescription>
       </DialogHeader>
