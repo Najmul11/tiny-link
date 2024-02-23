@@ -1,12 +1,16 @@
+"use client";
 import Link from "next/link";
-import React from "react";
 import { Button } from "../ui/button";
 import { Avatar } from "./Avatar";
 import { Dialog, DialogTrigger } from "../ui/dialog";
 import AuthDialog from "../auth/AuthDialog";
 
+import { useSession, signIn, signOut } from "next-auth/react";
+
 const Header = () => {
-  const user = false;
+  const { data: session } = useSession();
+  console.log(session);
+
   return (
     <div className="bg-black text-white">
       <div className="max-w-screen-xl mx-auto">
@@ -23,7 +27,7 @@ const Header = () => {
 
           {/* right */}
           <div>
-            {user ? (
+            {session?.user ? (
               <Avatar />
             ) : (
               <Dialog>

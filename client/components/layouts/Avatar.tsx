@@ -9,14 +9,19 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { ChevronsUpDown, Link, LogOut, UserRound } from "lucide-react";
+import { ChevronsUpDown, Link, LogOut } from "lucide-react";
+
+import { useSession, signOut } from "next-auth/react";
 
 export function Avatar() {
+  const { data: session } = useSession();
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="outline" size={"sm"} className="flex gap-5 text-black">
-          Najmul <ChevronsUpDown size={15} className="text-gray-500" />
+          {session?.user?.name ?? "No Name"}
+          <ChevronsUpDown size={15} className="text-gray-500" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
@@ -32,7 +37,7 @@ export function Avatar() {
         </DropdownMenuGroup>
 
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
+        <DropdownMenuItem onClick={() => signOut()}>
           Log out
           <DropdownMenuShortcut>
             <LogOut size={20} />
