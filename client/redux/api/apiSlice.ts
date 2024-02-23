@@ -7,7 +7,25 @@ export const api = createApi({
     credentials: "include",
   }),
   tagTypes: [],
-  endpoints: (builder) => ({}),
+  endpoints: (builder) => ({
+    userLogin: builder.mutation({
+      query: (data) => ({
+        url: `/user/login`,
+        method: "POST",
+        body: data,
+      }),
+    }),
+
+    getProfile: builder.query({
+      query: (accessToken) => ({
+        url: `/user/me`,
+        method: "Get",
+        headers: {
+          Authorization: accessToken,
+        },
+      }),
+    }),
+  }),
 });
 
 export const {} = api;

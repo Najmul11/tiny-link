@@ -2,9 +2,11 @@ import Link from "next/link";
 import React from "react";
 import { Button } from "../ui/button";
 import { Avatar } from "./Avatar";
+import { Dialog, DialogTrigger } from "../ui/dialog";
+import AuthDialog from "../auth/AuthDialog";
 
 const Header = () => {
-  const user = true;
+  const user = false;
   return (
     <div className="bg-black text-white">
       <div className="max-w-screen-xl mx-auto">
@@ -24,9 +26,14 @@ const Header = () => {
             {user ? (
               <Avatar />
             ) : (
-              <Button variant="outline" className="text-black">
-                Login with Email
-              </Button>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button variant="outline" className="text-black">
+                    Login
+                  </Button>
+                </DialogTrigger>
+                <AuthDialog />
+              </Dialog>
             )}
           </div>
         </div>
