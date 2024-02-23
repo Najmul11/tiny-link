@@ -5,11 +5,10 @@ import { Avatar } from "./Avatar";
 import { Dialog, DialogTrigger } from "../ui/dialog";
 import AuthDialog from "../auth/AuthDialog";
 
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
 
 const Header = () => {
   const { data: session } = useSession();
-  console.log(session);
 
   return (
     <div className="bg-black text-white">
