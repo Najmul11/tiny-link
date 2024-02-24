@@ -7,7 +7,7 @@ import { Meteors } from "../ui/meteors";
 const Footer = () => {
   return (
     <div className="relative overflow-hidden py-10 mt-[20vh]">
-      <div className=" max-w-screen-xl mx-auto text-white/80 flex justify-between">
+      <div className=" max-w-screen-xl px-4 xl:px-[unset] mx-auto text-white/80 flex justify-between">
         <Link
           href={"https://buy-me-coffee-sigma.vercel.app/"}
           target="_blank"
