@@ -4,7 +4,7 @@ import { CalendarDays, Link, Link2, TextSelect } from "lucide-react";
 
 const Features = () => {
   return (
-    <BentoGrid className="max-w-5xl mx-auto">
+    <BentoGrid className="max-w-5xl mx-auto px-4 xl:px-[unset]">
       {items.map((item, i) => (
         <BentoGridItem
           key={i}

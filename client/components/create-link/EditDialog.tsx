@@ -9,8 +9,8 @@ import { Button } from "../ui/button";
 
 const EditDialog = () => {
   return (
-    <DialogContent>
-      <DialogHeader>
+    <DialogContent className="bg-transparent border-0 bg-white">
+      <DialogHeader className=" ">
         <DialogTitle>Customize short link</DialogTitle>
         <DialogDescription className="flex flex-col gap-5 !mt-3">
           <div className="flex flex-col gap-2">
