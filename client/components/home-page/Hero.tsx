@@ -16,7 +16,7 @@ const Hero = () => {
         <p className="text-2xl lg:text-4xl md:text-3xl sm:text-2xl font-bold relative z-20 bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-500  text-center">
           More than just shorter links
         </p>
-        <p className="text-sm mt-3 text-white/80 w-96 lg:w-[unset] mx-auto">
+        <p className="text-sm mt-3 text-white/80 w-96 lg:w-[unset] xl:w-[70%] mx-auto">
           Shorten links using NanoLink super fast. NanoLink is a oneclick paste
           and copy URL shortener which alows you to shorten links lighting fast
         </p>
