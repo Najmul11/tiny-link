@@ -10,10 +10,6 @@ const UserSchema = new Schema<TUser, Record<string, unknown>>({
     type: String,
     required: true,
   },
-  password: {
-    type: String,
-    required: false,
-  },
 });
 
 export const User = model<TUser, UserModel>('User', UserSchema);
