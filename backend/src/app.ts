@@ -5,6 +5,7 @@ import config from './config';
 import globalErrorhandler from './app/middlewares/globalErrorHandler';
 import { routes } from './app/routes';
 import { RedirectRoutes } from './app/modules/redirect/redirect.routes';
+import { PrismaClient } from '@prisma/client';
 
 const app: Application = express();
 
@@ -15,6 +16,8 @@ app.get('/', (req: Request, res: Response) => {
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+export const prisma = new PrismaClient();
 
 app.use('/api/v1', routes);
 app.use('/', RedirectRoutes);
