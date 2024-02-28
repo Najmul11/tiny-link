@@ -17,6 +17,18 @@ const createUser = catchAsyncError(async (req: Request, res: Response) => {
   });
 });
 
+const getAllUsers = catchAsyncError(async (req: Request, res: Response) => {
+  const result = await UserService.getAllUsers();
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Users retrieved successfully',
+    data: result,
+  });
+});
+
 export const UserController = {
   createUser,
+  getAllUsers,
 };
