@@ -1,36 +1,41 @@
+/* eslint-disable no-console */
+import { Link, PrismaClient } from '@prisma/client';
 import { shortUrlHelper } from '../../../utils/short-url';
-import { TLink } from './links.interface';
-import { Link } from './links.model';
 
-const createLink = async (payload: TLink, user: string) => {
-  const { originalLink } = payload;
+const prisma = new PrismaClient();
 
-  const lastLink = await Link.findOne().sort({ createdAt: -1 });
+const createLink = async (payload: Link) => {
+  const { originalLink, userId } = payload;
 
-  const shortURL = shortUrlHelper(lastLink?.shortLink ?? 'short-url-1');
+  const lastLink = await prisma.link.findFirst({
+    orderBy: {
+      createdAt: 'desc',
+    },
+  });
 
-  const result = await Link.create({
-    originalLink,
-    shortURL,
-    user,
+  const shortLink = shortUrlHelper(lastLink?.shortLink ?? 'short-url-0');
+
+  const result = await prisma.link.create({
+    data: {
+      originalLink,
+      shortLink,
+      userId,
+    },
   });
 
   return result;
 };
 
-const deleteLink = async (id: string) => {
-  const result = await Link.findByIdAndDelete(id);
-  return result;
-};
-
-// get user specific urls
-const userLinks = async (userId: string) => {
-  const result = await Link.find({ user: userId }).sort({ createdAt: -1 });
+const deleteLink = async (id: number) => {
+  const result = await prisma.link.delete({
+    where: {
+      id,
+    },
+  });
   return result;
 };
 
 export const LinkService = {
   createLink,
   deleteLink,
-  userLinks,
 };

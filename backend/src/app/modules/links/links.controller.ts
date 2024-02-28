@@ -6,9 +6,8 @@ import { LinkService } from './links.service';
 
 const createLink = catchAsyncError(async (req: Request, res: Response) => {
   const Link = req.body;
-  const user = req.user;
 
-  const result = await LinkService.createLink(Link, user);
+  const result = await LinkService.createLink(Link);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -19,14 +18,12 @@ const createLink = catchAsyncError(async (req: Request, res: Response) => {
 });
 
 const deleteLink = catchAsyncError(async (req: Request, res: Response) => {
-  const { id } = req.params;
-
-  const result = await LinkService.deleteLink(id);
+  const result = await LinkService.deleteLink(Number(req.params.id));
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Link generated successfully',
+    message: 'Link deleted successfully',
     data: result,
   });
 });

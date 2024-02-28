@@ -1,5 +1,4 @@
 /* eslint-disable no-console */
-import mongoose from 'mongoose';
 import { Server } from 'http';
 import app from './app';
 import config from './config';
@@ -13,7 +12,6 @@ process.on('uncaughtException', error => {
 
 async function bootstrap() {
   try {
-    await mongoose.connect(config.database_url as string);
     console.log('🚀 Database connected succesfully');
 
     server = app.listen(config.port, () => {
