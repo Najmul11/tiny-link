@@ -3,5 +3,6 @@ import { LinkController } from './links.controller';
 const router = express.Router();
 
 router.post('/create-link', LinkController.createLink);
+router.delete('/delete-link/:id', LinkController.deleteLink);
 
 export const LinkRoutes = router;

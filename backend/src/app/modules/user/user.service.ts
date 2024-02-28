@@ -1,15 +1,16 @@
 import httpStatus from 'http-status';
 import ApiError from '../../../errors/ApiError';
-import { TUser } from './user.interface';
 import { prisma } from '../../../app';
+import { user } from '@prisma/client';
 
-const createUser = async ({ email, name }: TUser) => {
+const createUser = async ({ email, name }: user) => {
   if (!email || !name)
     throw new ApiError(httpStatus.BAD_REQUEST, 'Provide required information');
 
   const userExist = await prisma.user.findUnique({
     where: { email },
   });
+
   if (userExist)
     throw new ApiError(httpStatus.BAD_REQUEST, 'User already exist');
 
@@ -28,7 +29,16 @@ const getAllUsers = async () => {
   return result;
 };
 
+const getSingleUser = async (email: string) => {
+  const result = await prisma.user.findUnique({ where: { email } });
+
+  if (!result) throw new ApiError(httpStatus.BAD_REQUEST, 'No User Found');
+
+  return result;
+};
+
 export const UserService = {
   createUser,
   getAllUsers,
+  getSingleUser,
 };
