@@ -5,7 +5,7 @@ export const api = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:5001/api/v1",
   }),
-  tagTypes: [],
+  tagTypes: ["user"],
   endpoints: (builder) => ({
     userLogin: builder.mutation({
       query: (data) => ({
@@ -20,6 +20,7 @@ export const api = createApi({
         url: `/user/${email}`,
         method: "Get",
       }),
+      providesTags: ["user"],
     }),
 
     createLink: builder.mutation({
@@ -28,6 +29,14 @@ export const api = createApi({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["user"],
+    }),
+    deleteLink: builder.mutation({
+      query: (id) => ({
+        url: `/link/delete-link/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["user"],
     }),
   }),
 });
@@ -36,4 +45,5 @@ export const {
   useUserLoginMutation,
   useGetUserProfileQuery,
   useCreateLinkMutation,
+  useDeleteLinkMutation,
 } = api;

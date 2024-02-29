@@ -29,8 +29,8 @@ const Header = () => {
 
   return (
     <div className="bg-black text-white">
-      <div className="max-w-screen-xl mx-auto px-4 xl:px-[unset]">
-        <div className="flex justify-between py-3">
+      <div className="max-w-screen-xl mx-auto px-4 xl:px-[unset] py-6">
+        <div className="flex justify-between ">
           {/* left */}
           <div className="flex gap-10 items-center">
             <Link href={"/"} className="font-bold text-2xl">

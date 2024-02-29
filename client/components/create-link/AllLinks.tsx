@@ -1,9 +1,16 @@
 "use client";
-import { useGetUserProfileQuery } from "@/redux/api/apiSlice";
+import {
+  useDeleteLinkMutation,
+  useGetUserProfileQuery,
+} from "@/redux/api/apiSlice";
 import LinkSkeleton from "./LinkSkeleton";
 import SingleLink from "./SingleLink";
 import { useSession } from "next-auth/react";
 import { TLink } from "@/types/link";
+
+type TLoad = {
+  id: boolean;
+};
 
 const AllLinks = () => {
   const { data: session } = useSession();
@@ -11,6 +18,13 @@ const AllLinks = () => {
   const { data: user, isLoading } = useGetUserProfileQuery(
     session?.user?.email
   );
+
+  const [deleteLink, { isLoading: deleteLinkLoading }] =
+    useDeleteLinkMutation();
+
+  const handleDeleteLink = async (id: number) => {
+    const res = await deleteLink(id);
+  };
 
   return (
     <div className="flex flex-col gap-3">
@@ -25,7 +39,12 @@ const AllLinks = () => {
           {user?.data?.links.length > 0 ? (
             <div className="flex flex-col gap-3">
               {user?.data?.links.map((link: TLink) => (
-                <SingleLink key={link.id} link={link} />
+                <SingleLink
+                  deleteLinkLoading={deleteLinkLoading}
+                  handleDeleteLink={handleDeleteLink}
+                  key={link.id}
+                  link={link}
+                />
               ))}
             </div>
           ) : (

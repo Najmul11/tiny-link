@@ -1,5 +1,5 @@
 "use client";
-import { CheckSquare2, Copy, Pencil, Trash2 } from "lucide-react";
+import { CheckSquare2, Copy, LoaderIcon, Pencil, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { Dialog, DialogTrigger } from "../ui/dialog";
 import EditDialog from "./EditDialog";
@@ -8,10 +8,12 @@ import { TLink } from "@/types/link";
 
 type TProps = {
   link: TLink;
+  handleDeleteLink: (id: number) => void;
+  deleteLinkLoading: boolean;
 };
 
-const SingleLink = ({ link }: TProps) => {
-  const { clicks, originalLink, shortLink, id } = link;
+const SingleLink = ({ link, handleDeleteLink, deleteLinkLoading }: TProps) => {
+  const { clicks, shortLink, id } = link;
   const [showCheckmark, setShowCheckmark] = useState(false);
 
   const handleClick = () => {
@@ -57,12 +59,19 @@ const SingleLink = ({ link }: TProps) => {
             <EditDialog />
           </Dialog>
 
-          <button className="p-2 bg-slate-800 hover:bg-slate-700 duration-300 rounded-md">
-            <Trash2
-              size={18}
-              className="text-red-500 hover:text-red-600 duration-300"
-            />
-          </button>
+          {deleteLinkLoading ? (
+            <LoaderIcon className="animate-spin" size={15} />
+          ) : (
+            <button
+              onClick={() => handleDeleteLink(id)}
+              className="p-2 bg-slate-800 hover:bg-slate-700 duration-300 rounded-md"
+            >
+              <Trash2
+                size={18}
+                className="text-red-500 hover:text-red-600 duration-300"
+              />
+            </button>
+          )}
         </div>
       </div>
     </div>

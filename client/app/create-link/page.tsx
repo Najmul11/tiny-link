@@ -8,6 +8,8 @@ import { useCreateLinkMutation } from "@/redux/api/apiSlice";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 
+import ff from "../../public/favicon.svg";
+
 const CreateLinkPage = () => {
   const [originalLink, setOriginalLink] = useState<string>("");
   const [shortLink, setShortLink] = useState<string>("");
