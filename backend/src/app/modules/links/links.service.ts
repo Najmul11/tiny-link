@@ -1,11 +1,17 @@
 /* eslint-disable no-console */
-import { Link, PrismaClient } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
 import { shortUrlHelper } from '../../../utils/short-url';
+import { TLink } from './links.interface';
+import ApiError from '../../../errors/ApiError';
+import httpStatus from 'http-status';
 
 const prisma = new PrismaClient();
 
-const createLink = async (payload: Link) => {
-  const { originalLink, userId } = payload;
+const createLink = async (payload: TLink) => {
+  const { originalLink, email } = payload;
+
+  const userExist = await prisma.user.findUnique({ where: { email } });
+  if (!userExist) throw new ApiError(httpStatus.NOT_FOUND, 'Invalid user');
 
   const lastLink = await prisma.link.findFirst({
     orderBy: {
@@ -19,9 +25,10 @@ const createLink = async (payload: Link) => {
     data: {
       originalLink,
       shortLink,
-      userId,
+      userId: userExist.id,
     },
   });
+  console.log(result);
 
   return result;
 };

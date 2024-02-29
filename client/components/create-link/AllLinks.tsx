@@ -7,10 +7,10 @@ import { TLink } from "@/types/link";
 
 const AllLinks = () => {
   const { data: session } = useSession();
+
   const { data: user, isLoading } = useGetUserProfileQuery(
     session?.user?.email
   );
-  console.log(user?.data?.links);
 
   return (
     <div className="flex flex-col gap-3">

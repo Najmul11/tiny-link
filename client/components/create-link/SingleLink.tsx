@@ -11,6 +11,7 @@ type TProps = {
 };
 
 const SingleLink = ({ link }: TProps) => {
+  const { clicks, originalLink, shortLink, id } = link;
   const [showCheckmark, setShowCheckmark] = useState(false);
 
   const handleClick = () => {
@@ -21,7 +22,6 @@ const SingleLink = ({ link }: TProps) => {
       }, 3000);
     }
   };
-  const { shortLink } = link;
   return (
     <div className="bg-slate-900 p-5 rounded-md flex flex-col gap-2">
       <div className="flex gap-5 justify-between items-center">
@@ -42,7 +42,7 @@ const SingleLink = ({ link }: TProps) => {
           </button>
         )}
       </div>
-      <p className="text-sm text-white/80">Clicks: 20</p>
+      <p className="text-sm text-white/80">Clicks: {clicks}</p>
 
       <div className="flex items-center justify-between">
         <span className="text-white/80 text-sm">Exp: 11 Jan,2024</span>

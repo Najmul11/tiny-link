@@ -1,9 +1,8 @@
 "use client";
 import { CheckSquare2, Copy } from "lucide-react";
-import React, { useState } from "react";
-import { ShortLinkSkeleton } from "./LinkSkeleton";
+import { useState } from "react";
 
-const CreatedLink = () => {
+const CreatedLink = ({ shortLink }: { shortLink: string }) => {
   const [showCheckmark, setShowCheckmark] = useState(false);
 
   const handleClick = () => {
@@ -17,7 +16,7 @@ const CreatedLink = () => {
   return (
     <>
       <div className="flex gap-10 items-center justify-center">
-        <p>https://nano-link.vercel.app/JOfe</p>
+        <p>{shortLink}</p>
 
         {showCheckmark ? (
           <button className="hover:bg-slate-800 p-2 duration-300 rounded-md">
@@ -31,9 +30,6 @@ const CreatedLink = () => {
             <Copy size={18} />
           </button>
         )}
-      </div>
-      <div className="w-72 mx-auto">
-        <ShortLinkSkeleton />
       </div>
     </>
   );

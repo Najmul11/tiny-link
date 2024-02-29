@@ -5,6 +5,7 @@ import Header from "@/components/layouts/Header";
 import Footer from "@/components/layouts/Footer";
 import ReduxProvider from "./ReduxProvider";
 import NextAuthProvider from "./NextAuthProvider";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,6 +27,8 @@ export default function RootLayout({
             <Header />
             <main className="bg-black text-white min-h-screen">{children}</main>
             <Footer />
+
+            <Toaster />
           </body>
         </html>
       </ReduxProvider>

@@ -15,9 +15,16 @@ const Header = () => {
   const [userLogin] = useUserLoginMutation();
 
   useEffect(() => {
-    if (session) {
-      userLogin({ name: session.user?.name, email: session.user?.email });
-    }
+    const login = async () => {
+      if (session) {
+        const res = await userLogin({
+          name: session.user?.name,
+          email: session.user?.email,
+        });
+        return res;
+      }
+    };
+    const response = login();
   }, [session, userLogin]);
 
   return (

@@ -4,3 +4,9 @@ export type TLink = {
   shortLink: string;
   clicks: number;
 };
+
+export type TSortLink = {
+  handleCreateLink: () => void;
+  setOriginalLink: (link: string) => void;
+  originalLink: string;
+};

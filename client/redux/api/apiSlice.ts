@@ -21,7 +21,19 @@ export const api = createApi({
         method: "Get",
       }),
     }),
+
+    createLink: builder.mutation({
+      query: (data) => ({
+        url: `/link/create-link`,
+        method: "POST",
+        body: data,
+      }),
+    }),
   }),
 });
 
-export const { useUserLoginMutation, useGetUserProfileQuery } = api;
+export const {
+  useUserLoginMutation,
+  useGetUserProfileQuery,
+  useCreateLinkMutation,
+} = api;
