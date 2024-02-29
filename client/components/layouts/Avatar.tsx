@@ -9,9 +9,11 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { ChevronsUpDown, Link, LogOut } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { ChevronsUpDown, Link as LinkIcon, LogOut } from "lucide-react";
 
 import { useSession, signOut } from "next-auth/react";
+import Link from "next/link";
 
 export function Avatar() {
   const { data: session } = useSession();
@@ -19,25 +21,34 @@ export function Avatar() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size={"sm"} className="flex gap-5 text-black">
+        <Button
+          variant="outline"
+          size={"sm"}
+          className="flex gap-5 text-black "
+        >
           {session?.user?.name ?? "No Name"}
           <ChevronsUpDown size={15} className="text-gray-500" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56">
+      <DropdownMenuContent className="w-56 z-[2000]">
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem>
-            All Links
-            <DropdownMenuShortcut>
-              <Link size={20} />
-            </DropdownMenuShortcut>
+            <Link
+              href="/create-link"
+              className={cn("!cursor-pointer flex justify-between w-full")}
+            >
+              All Links
+              <DropdownMenuShortcut>
+                <LinkIcon size={20} />
+              </DropdownMenuShortcut>
+            </Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>
 
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={() => signOut()}>
+        <DropdownMenuItem className="cursor-pointer" onClick={() => signOut()}>
           Log out
           <DropdownMenuShortcut>
             <LogOut size={20} />
@@ -46,4 +57,8 @@ export function Avatar() {
       </DropdownMenuContent>
     </DropdownMenu>
   );
+}
+
+{
+  /* <Link size={20} /> */
 }

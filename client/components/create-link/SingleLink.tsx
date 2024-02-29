@@ -1,17 +1,19 @@
 "use client";
-import { CheckSquare2, Copy, Pencil, Trash2 } from "lucide-react";
+import { CheckSquare2, Copy, LoaderIcon, Pencil, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { Dialog, DialogTrigger } from "../ui/dialog";
 import EditDialog from "./EditDialog";
 import { useState } from "react";
+import { TLink } from "@/types/link";
 
 type TProps = {
-  link: {
-    shortLink: string;
-  };
+  link: TLink;
+  handleDeleteLink: (id: number) => void;
+  deleteLinkLoading: { [key: number]: boolean };
 };
 
-const SingleLink = ({ link }: TProps) => {
+const SingleLink = ({ link, handleDeleteLink, deleteLinkLoading }: TProps) => {
+  const { clicks, shortLink, id } = link;
   const [showCheckmark, setShowCheckmark] = useState(false);
 
   const handleClick = () => {
@@ -22,7 +24,6 @@ const SingleLink = ({ link }: TProps) => {
       }, 3000);
     }
   };
-  const { shortLink } = link;
   return (
     <div className="bg-slate-900 p-5 rounded-md flex flex-col gap-2">
       <div className="flex gap-5 justify-between items-center">
@@ -43,7 +44,7 @@ const SingleLink = ({ link }: TProps) => {
           </button>
         )}
       </div>
-      <p className="text-sm text-white/80">Clicks: 20</p>
+      <p className="text-sm text-white/80">Clicks: {clicks}</p>
 
       <div className="flex items-center justify-between">
         <span className="text-white/80 text-sm">Exp: 11 Jan,2024</span>
@@ -58,12 +59,21 @@ const SingleLink = ({ link }: TProps) => {
             <EditDialog />
           </Dialog>
 
-          <button className="p-2 bg-slate-800 hover:bg-slate-700 duration-300 rounded-md">
-            <Trash2
-              size={18}
-              className="text-red-500 hover:text-red-600 duration-300"
-            />
-          </button>
+          {deleteLinkLoading[`${id}`] ? (
+            <div className="p-2 bg-slate-800 hover:bg-slate-700 duration-300 rounded-md">
+              <LoaderIcon className="animate-spin" size={18} />
+            </div>
+          ) : (
+            <button
+              onClick={() => handleDeleteLink(id)}
+              className="p-2 bg-slate-800 hover:bg-slate-700 duration-300 rounded-md"
+            >
+              <Trash2
+                size={18}
+                className="text-red-500 hover:text-red-600 duration-300"
+              />
+            </button>
+          )}
         </div>
       </div>
     </div>

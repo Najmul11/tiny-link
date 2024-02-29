@@ -3,10 +3,9 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const api = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: "",
-    credentials: "include",
+    baseUrl: "http://localhost:5001/api/v1",
   }),
-  tagTypes: [],
+  tagTypes: ["user"],
   endpoints: (builder) => ({
     userLogin: builder.mutation({
       query: (data) => ({
@@ -16,16 +15,35 @@ export const api = createApi({
       }),
     }),
 
-    getProfile: builder.query({
-      query: (accessToken) => ({
-        url: `/user/me`,
+    getUserProfile: builder.query({
+      query: (email) => ({
+        url: `/user/${email}`,
         method: "Get",
-        headers: {
-          Authorization: accessToken,
-        },
       }),
+      providesTags: ["user"],
+    }),
+
+    createLink: builder.mutation({
+      query: (data) => ({
+        url: `/link/create-link`,
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["user"],
+    }),
+    deleteLink: builder.mutation({
+      query: (id) => ({
+        url: `/link/delete-link/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["user"],
     }),
   }),
 });
 
-export const {} = api;
+export const {
+  useUserLoginMutation,
+  useGetUserProfileQuery,
+  useCreateLinkMutation,
+  useDeleteLinkMutation,
+} = api;

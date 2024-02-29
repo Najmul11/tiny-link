@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-console */
-import { ErrorRequestHandler, NextFunction, Request, Response } from 'express';
+import { ErrorRequestHandler, Request, Response } from 'express';
 import config from '../../config';
 import { IGenericErrorMessage } from '../../interfaces/error';
 import ApiError from '../../errors/ApiError';
@@ -11,7 +11,6 @@ const globalErrorhandler: ErrorRequestHandler = (
   error,
   req: Request,
   res: Response,
-  next: NextFunction
 ) => {
   config.env === 'development' && console.log(error);
 
@@ -59,7 +58,7 @@ const globalErrorhandler: ErrorRequestHandler = (
     stack: config.env !== 'production' ? error?.stack : undefined,
   });
 
-  next();
+  // next();
 };
 
 export default globalErrorhandler;
