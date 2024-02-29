@@ -4,6 +4,7 @@ import CreateLink from "@/components/create-link/CreateLink";
 import CreatedLink from "@/components/create-link/CreatedLink";
 import { ShortLinkSkeleton } from "@/components/create-link/LinkSkeleton";
 import { useToast } from "@/components/ui/use-toast";
+import { isValidURL } from "@/lib/isValid-url";
 import { useCreateLinkMutation } from "@/redux/api/apiSlice";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
@@ -18,6 +19,13 @@ const CreateLinkPage = () => {
   const [createLink, { isLoading }] = useCreateLinkMutation();
 
   const handleCreateLink = async () => {
+    if (!isValidURL(originalLink)) {
+      toast({
+        variant: "destructive",
+        description: "Invalid URL🫥🫥🫥",
+      });
+      return;
+    }
     const res = (await createLink({
       originalLink,
       email: session?.user?.email,
