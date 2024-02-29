@@ -9,7 +9,7 @@ import { TLink } from "@/types/link";
 type TProps = {
   link: TLink;
   handleDeleteLink: (id: number) => void;
-  deleteLinkLoading: boolean;
+  deleteLinkLoading: { [key: number]: boolean };
 };
 
 const SingleLink = ({ link, handleDeleteLink, deleteLinkLoading }: TProps) => {
@@ -59,8 +59,10 @@ const SingleLink = ({ link, handleDeleteLink, deleteLinkLoading }: TProps) => {
             <EditDialog />
           </Dialog>
 
-          {deleteLinkLoading ? (
-            <LoaderIcon className="animate-spin" size={15} />
+          {deleteLinkLoading[`${id}`] ? (
+            <div className="p-2 bg-slate-800 hover:bg-slate-700 duration-300 rounded-md">
+              <LoaderIcon className="animate-spin" size={18} />
+            </div>
           ) : (
             <button
               onClick={() => handleDeleteLink(id)}

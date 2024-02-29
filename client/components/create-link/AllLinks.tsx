@@ -7,6 +7,7 @@ import LinkSkeleton from "./LinkSkeleton";
 import SingleLink from "./SingleLink";
 import { useSession } from "next-auth/react";
 import { TLink } from "@/types/link";
+import { useState } from "react";
 
 type TLoad = {
   id: boolean;
@@ -19,11 +20,19 @@ const AllLinks = () => {
     session?.user?.email
   );
 
+  const [deleteLinkMap, setDeleteLinkMap] = useState<{
+    [key: number]: boolean;
+  }>({});
+  console.log(deleteLinkMap);
+
   const [deleteLink, { isLoading: deleteLinkLoading }] =
     useDeleteLinkMutation();
 
   const handleDeleteLink = async (id: number) => {
+    setDeleteLinkMap({ [id]: true });
     const res = await deleteLink(id);
+    setDeleteLinkMap({ [id]: deleteLinkLoading });
+    console.log(deleteLinkMap[`${id}`]);
   };
 
   return (
@@ -40,7 +49,7 @@ const AllLinks = () => {
             <div className="flex flex-col gap-3">
               {user?.data?.links.map((link: TLink) => (
                 <SingleLink
-                  deleteLinkLoading={deleteLinkLoading}
+                  deleteLinkLoading={deleteLinkMap}
                   handleDeleteLink={handleDeleteLink}
                   key={link.id}
                   link={link}
