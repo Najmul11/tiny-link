@@ -8,6 +8,7 @@ import SingleLink from "./SingleLink";
 import { useSession } from "next-auth/react";
 import { TLink } from "@/types/link";
 import { useState } from "react";
+import { useToast } from "../ui/use-toast";
 
 type TLoad = {
   id: boolean;
@@ -15,6 +16,7 @@ type TLoad = {
 
 const AllLinks = () => {
   const { data: session } = useSession();
+  const { toast } = useToast();
 
   const { data: user, isLoading } = useGetUserProfileQuery(
     session?.user?.email
@@ -23,16 +25,31 @@ const AllLinks = () => {
   const [deleteLinkMap, setDeleteLinkMap] = useState<{
     [key: number]: boolean;
   }>({});
-  console.log(deleteLinkMap);
 
   const [deleteLink, { isLoading: deleteLinkLoading }] =
     useDeleteLinkMutation();
 
   const handleDeleteLink = async (id: number) => {
     setDeleteLinkMap({ [id]: true });
-    const res = await deleteLink(id);
+
+    const res = (await deleteLink(id)) as any;
+
     setDeleteLinkMap({ [id]: deleteLinkLoading });
-    console.log(deleteLinkMap[`${id}`]);
+
+    if (res.data.success) {
+      toast({
+        description: (
+          <span>
+            Tiny Link is <span className="text-red-500">deleted.</span>
+          </span>
+        ),
+      });
+    } else {
+      toast({
+        variant: "destructive",
+        description: "Failed🫥🫥🫥",
+      });
+    }
   };
 
   return (

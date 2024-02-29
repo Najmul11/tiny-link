@@ -8,8 +8,6 @@ import { useCreateLinkMutation } from "@/redux/api/apiSlice";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 
-import ff from "../../public/favicon.svg";
-
 const CreateLinkPage = () => {
   const [originalLink, setOriginalLink] = useState<string>("");
   const [shortLink, setShortLink] = useState<string>("");
@@ -27,7 +25,11 @@ const CreateLinkPage = () => {
 
     if (res?.data?.success) {
       toast({
-        description: "Yay🎯Tiny Link is ready",
+        description: (
+          <span>
+            Yay🎯Tiny Link is <span className="text-green-500">ready</span>
+          </span>
+        ),
       });
 
       setShortLink(res.data?.data?.shortLink);
