@@ -24,7 +24,7 @@ const Hero = () => {
           <Button
             borderRadius="0.5rem"
             duration={8000}
-            containerClassName="h-12 w-72 mt-10 hover:scale-105 duration-300"
+            containerClassName="h-12 w-72 mt-3 hover:scale-105 duration-300"
             className="   bg-slate-900 text-white/80 "
           >
             Start Shortening for free

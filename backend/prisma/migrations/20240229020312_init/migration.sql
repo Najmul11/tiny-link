@@ -3,6 +3,7 @@ CREATE TABLE "user" (
     "id" SERIAL NOT NULL,
     "name" TEXT,
     "email" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "user_pkey" PRIMARY KEY ("id")
 );
@@ -12,7 +13,10 @@ CREATE TABLE "Link" (
     "id" SERIAL NOT NULL,
     "originalLink" TEXT NOT NULL,
     "shortLink" TEXT NOT NULL,
+    "clicks" INTEGER NOT NULL DEFAULT 0,
     "userId" INTEGER NOT NULL,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Link_pkey" PRIMARY KEY ("id")
 );

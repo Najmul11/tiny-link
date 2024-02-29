@@ -11,7 +11,7 @@ const globalErrorhandler: ErrorRequestHandler = (
   error,
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   config.env === 'development' && console.log(error);
 
@@ -59,7 +59,7 @@ const globalErrorhandler: ErrorRequestHandler = (
     stack: config.env !== 'production' ? error?.stack : undefined,
   });
 
-  next();
+  // next();
 };
 
 export default globalErrorhandler;

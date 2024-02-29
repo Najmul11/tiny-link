@@ -30,7 +30,16 @@ const getAllUsers = async () => {
 };
 
 const getSingleUser = async (email: string) => {
-  const result = await prisma.user.findUnique({ where: { email } });
+  const result = await prisma.user.findUnique({
+    where: { email },
+    include: {
+      links: {
+        orderBy: {
+          createdAt: 'desc',
+        },
+      },
+    },
+  });
 
   if (!result) throw new ApiError(httpStatus.BAD_REQUEST, 'No User Found');
 

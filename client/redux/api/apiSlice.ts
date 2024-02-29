@@ -3,8 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const api = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: "",
-    credentials: "include",
+    baseUrl: "http://localhost:5001/api/v1",
   }),
   tagTypes: [],
   endpoints: (builder) => ({
@@ -16,16 +15,13 @@ export const api = createApi({
       }),
     }),
 
-    getProfile: builder.query({
-      query: (accessToken) => ({
-        url: `/user/me`,
+    getUserProfile: builder.query({
+      query: (email) => ({
+        url: `/user/${email}`,
         method: "Get",
-        headers: {
-          Authorization: accessToken,
-        },
       }),
     }),
   }),
 });
 
-export const {} = api;
+export const { useUserLoginMutation, useGetUserProfileQuery } = api;

@@ -6,9 +6,19 @@ import { Dialog, DialogTrigger } from "../ui/dialog";
 import AuthDialog from "../auth/AuthDialog";
 
 import { useSession } from "next-auth/react";
+import { useEffect } from "react";
+import { useUserLoginMutation } from "@/redux/api/apiSlice";
 
 const Header = () => {
   const { data: session } = useSession();
+
+  const [userLogin] = useUserLoginMutation();
+
+  useEffect(() => {
+    if (session) {
+      userLogin({ name: session.user?.name, email: session.user?.email });
+    }
+  }, [session, userLogin]);
 
   return (
     <div className="bg-black text-white">

@@ -4,11 +4,10 @@ import Link from "next/link";
 import { Dialog, DialogTrigger } from "../ui/dialog";
 import EditDialog from "./EditDialog";
 import { useState } from "react";
+import { TLink } from "@/types/link";
 
 type TProps = {
-  link: {
-    shortLink: string;
-  };
+  link: TLink;
 };
 
 const SingleLink = ({ link }: TProps) => {
