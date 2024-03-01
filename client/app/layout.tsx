@@ -24,11 +24,7 @@ export default function RootLayout({
       <ReduxProvider>
         <html lang="en">
           <body className={inter.className}>
-            <header className="sticky w-full top-0 z-[1000]">
-              <Header />
-            </header>
-            <main className="bg-black text-white min-h-screen">{children}</main>
-            <Footer />
+            <main className="bg-black text-white ">{children}</main>
 
             <Toaster />
           </body>

@@ -1,5 +1,5 @@
 "use client";
-import { CheckSquare2, Copy, LoaderIcon, Pencil, Trash2 } from "lucide-react";
+import { CheckSquare2, Copy, Loader2Icon, Pencil, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { Dialog, DialogTrigger } from "../ui/dialog";
 import EditDialog from "./EditDialog";
@@ -61,7 +61,7 @@ const SingleLink = ({ link, handleDeleteLink, deleteLinkLoading }: TProps) => {
 
           {deleteLinkLoading[`${id}`] ? (
             <div className="p-2 bg-slate-800 hover:bg-slate-700 duration-300 rounded-md">
-              <LoaderIcon className="animate-spin" size={18} />
+              <Loader2Icon className="animate-spin" size={18} />
             </div>
           ) : (
             <button

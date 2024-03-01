@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { Request, Response } from 'express';
 import catchAsyncError from '../../../shared/catchAsyncError';
 import sendResponse from '../../../shared/sendResponse';
@@ -9,16 +10,17 @@ const redirectToOriginalLink = catchAsyncError(
     const { shortLink } = req.params;
 
     const result = await RedirectService.redirectToOriginalLink(shortLink);
-    if (result) {
-      res.redirect(result);
-    } else {
-      sendResponse(res, {
-        statusCode: httpStatus.NOT_FOUND,
-        success: false,
-        message: 'Original link not found',
-        data: null,
-      });
-    }
+
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: false,
+      message: 'Link retrieved.',
+      data: result,
+    });
+
+    // if (result) {
+    //   res.status(301).redirect(result);
+    // }
   },
 );
 
