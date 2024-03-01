@@ -1,8 +1,12 @@
-import React from "react";
+"use client";
 import { Button } from "../ui/moving-border";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
+import { Dialog, DialogTrigger } from "../ui/dialog";
+import AuthDialog from "../auth/AuthDialog";
 
 const Hero = () => {
+  const { data: session } = useSession();
   return (
     <div className="h-[50rem] w-full   bg-grid-gray-800 relative flex pt-[28vh] justify-center">
       {/* Radial gradient for the container to give a faded look */}
@@ -20,16 +24,32 @@ const Hero = () => {
           Experience the speed of link shortening with Tiny Link&apos;s
           one-click paste and copy feature. Swift, simple, and efficient!
         </p>
-        <Link href={"/create-link"}>
-          <Button
-            borderRadius="0.5rem"
-            duration={8000}
-            containerClassName="h-12 w-72 mt-3 hover:scale-105 duration-300"
-            className="   bg-slate-900 text-white/80 "
-          >
-            Start Shortening for free
-          </Button>
-        </Link>
+        {session ? (
+          <Link href={"/create-link"}>
+            <Button
+              borderRadius="0.5rem"
+              duration={8000}
+              containerClassName="h-12 w-72 mt-3 hover:scale-105 duration-300"
+              className="   bg-slate-900 text-white/80 "
+            >
+              Start Shortening for free
+            </Button>
+          </Link>
+        ) : (
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button
+                borderRadius="0.5rem"
+                duration={8000}
+                containerClassName="h-12 w-72 mt-3 hover:scale-105 duration-300"
+                className="   bg-slate-900 text-white/80 "
+              >
+                Start Shortening for free
+              </Button>
+            </DialogTrigger>
+            <AuthDialog />
+          </Dialog>
+        )}
       </div>
     </div>
   );
