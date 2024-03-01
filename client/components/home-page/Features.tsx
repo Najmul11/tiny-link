@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 import { BentoGridItem, BentoGrid } from "../ui/bento-grid";
-import { CalendarDays, Link, Link2, TextSelect } from "lucide-react";
+import { CalendarDays, Link, TextSelect } from "lucide-react";
 
 const Features = () => {
   return (

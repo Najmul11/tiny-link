@@ -31,12 +31,20 @@ export const api = createApi({
       }),
       invalidatesTags: ["user"],
     }),
+
     deleteLink: builder.mutation({
       query: (id) => ({
         url: `/link/delete-link/${id}`,
         method: "DELETE",
       }),
       invalidatesTags: ["user"],
+    }),
+
+    redirectToOriginalLink: builder.query({
+      query: (shortLink) => ({
+        url: `http://localhost:5001/${shortLink}`,
+        method: "Get",
+      }),
     }),
   }),
 });
@@ -46,4 +54,5 @@ export const {
   useGetUserProfileQuery,
   useCreateLinkMutation,
   useDeleteLinkMutation,
+  useRedirectToOriginalLinkQuery,
 } = api;
