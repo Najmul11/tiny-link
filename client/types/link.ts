@@ -3,6 +3,7 @@ export type TLink = {
   originalLink: string;
   shortLink: string;
   clicks: number;
+  expiryDate: Date;
 };
 
 export type TSortLink = {

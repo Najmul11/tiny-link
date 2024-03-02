@@ -39,6 +39,14 @@ export const api = createApi({
       }),
       invalidatesTags: ["user"],
     }),
+    customizeLink: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `/link/customize/${id}`,
+        method: "PATCH",
+        body: data,
+      }),
+      invalidatesTags: ["user"],
+    }),
 
     redirectToOriginalLink: builder.query({
       query: (shortLink) => ({
@@ -55,4 +63,5 @@ export const {
   useCreateLinkMutation,
   useDeleteLinkMutation,
   useRedirectToOriginalLinkQuery,
+  useCustomizeLinkMutation,
 } = api;

@@ -5,6 +5,7 @@ import { Dialog, DialogTrigger } from "../ui/dialog";
 import EditDialog from "./EditDialog";
 import { useState } from "react";
 import { TLink } from "@/types/link";
+import { format } from "date-fns";
 
 type TProps = {
   link: TLink;
@@ -13,8 +14,9 @@ type TProps = {
 };
 
 const SingleLink = ({ link, handleDeleteLink, deleteLinkLoading }: TProps) => {
-  const { clicks, shortLink, id } = link;
+  const { clicks, shortLink, id, expiryDate } = link;
   const [showCheckmark, setShowCheckmark] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleClick = () => {
     if (!showCheckmark) {
@@ -47,16 +49,23 @@ const SingleLink = ({ link, handleDeleteLink, deleteLinkLoading }: TProps) => {
       <p className="text-sm text-white/80">Clicks: {clicks}</p>
 
       <div className="flex items-center justify-between">
-        <span className="text-white/80 text-sm">Exp: 11 Jan,2024</span>
+        <span className="text-white/80 text-sm">
+          Exp: {expiryDate ? format(expiryDate, "PPP") : ""}
+        </span>
 
         <div className="flex items-center gap-2">
-          <Dialog>
+          <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
               <button className="p-2  hover:bg-slate-700 duration-300 rounded-md">
                 <Pencil size={18} />
               </button>
             </DialogTrigger>
-            <EditDialog />
+            <EditDialog
+              tinyLink={shortLink}
+              id={id}
+              open={open}
+              setOpen={setOpen}
+            />
           </Dialog>
 
           {deleteLinkLoading[`${id}`] ? (
