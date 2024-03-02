@@ -1,9 +1,8 @@
 /* eslint-disable no-console */
 import { Request, Response } from 'express';
 import catchAsyncError from '../../../shared/catchAsyncError';
-import sendResponse from '../../../shared/sendResponse';
-import httpStatus from 'http-status';
 import { RedirectService } from './redirect.service';
+import config from '../../../config';
 
 const redirectToOriginalLink = catchAsyncError(
   async (req: Request, res: Response) => {
@@ -11,16 +10,11 @@ const redirectToOriginalLink = catchAsyncError(
 
     const result = await RedirectService.redirectToOriginalLink(shortLink);
 
-    sendResponse(res, {
-      statusCode: httpStatus.OK,
-      success: false,
-      message: 'Link retrieved.',
-      data: result,
-    });
-
-    // if (result) {
-    //   res.status(301).redirect(result);
-    // }
+    if (result) {
+      res.status(301).redirect(result);
+    } else {
+      res.status(400).redirect(`${config.frontend_url}/${shortLink}`);
+    }
   },
 );
 

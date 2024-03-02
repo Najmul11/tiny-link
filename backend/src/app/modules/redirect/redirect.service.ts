@@ -1,12 +1,15 @@
-import httpStatus from 'http-status';
-import { prisma } from '../../../app';
-import ApiError from '../../../errors/ApiError';
+import { PrismaClient } from '@prisma/client';
+const prisma = new PrismaClient();
 
 const redirectToOriginalLink = async (shortLink: string) => {
-  const link = await prisma.link.findFirst({ where: { shortLink } });
+  const link = await prisma.link.findUnique({ where: { shortLink } });
 
   if (!link) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Link not found');
+    return false;
+  }
+
+  if (link) {
+    if (link.clicks === link.maxClicks) return false;
   }
 
   await prisma.link.update({
@@ -14,7 +17,7 @@ const redirectToOriginalLink = async (shortLink: string) => {
     data: { clicks: { increment: 1 } },
   });
 
-  return link?.originalLink;
+  return link?.originalLink || '';
 };
 
 export const RedirectService = {

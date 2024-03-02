@@ -3,6 +3,8 @@ export type TLink = {
   originalLink: string;
   shortLink: string;
   clicks: number;
+  expiryDate: Date;
+  maxClicks: number | null | undefined | string;
 };
 
 export type TSortLink = {

@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const api = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:5001/api/v1",
+    baseUrl: process.env.NEXT_PUBLIC_BASEURL,
   }),
   tagTypes: ["user"],
   endpoints: (builder) => ({
@@ -39,10 +39,18 @@ export const api = createApi({
       }),
       invalidatesTags: ["user"],
     }),
+    customizeLink: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `/link/customize/${id}`,
+        method: "PATCH",
+        body: data,
+      }),
+      invalidatesTags: ["user"],
+    }),
 
     redirectToOriginalLink: builder.query({
       query: (shortLink) => ({
-        url: `http://localhost:5001/${shortLink}`,
+        url: `${process.env.NEXT_PUBLIC_BASE_URL_REDIRECT}/${shortLink}`,
         method: "Get",
       }),
     }),
@@ -55,4 +63,5 @@ export const {
   useCreateLinkMutation,
   useDeleteLinkMutation,
   useRedirectToOriginalLinkQuery,
+  useCustomizeLinkMutation,
 } = api;

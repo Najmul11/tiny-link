@@ -12,10 +12,9 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { CalendarDays } from "lucide-react";
+import { TDate } from "@/types/date-picker";
 
-export function DatePicker() {
-  const [date, setDate] = React.useState<Date>();
-
+export function DatePicker({ date, setDate }: TDate) {
   return (
     <Popover>
       <PopoverTrigger asChild>

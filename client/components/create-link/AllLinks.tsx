@@ -36,7 +36,7 @@ const AllLinks = () => {
 
     setDeleteLinkMap({ [id]: deleteLinkLoading });
 
-    if (res.data.success) {
+    if (res?.data?.success) {
       toast({
         description: (
           <span>
@@ -74,11 +74,21 @@ const AllLinks = () => {
               ))}
             </div>
           ) : (
-            <div className="p-5 rounded-md bg-slate-900 ">
-              <p className="font-bold text-md text-center text-white/80">
-                You haven&apos;t created any tiny link yet 🫥
-              </p>
-            </div>
+            <>
+              {session ? (
+                <div className="p-5 rounded-md bg-slate-900 ">
+                  <p className="font-bold text-md text-center text-white/80">
+                    You haven&apos;t created any tiny link yet 🫥
+                  </p>
+                </div>
+              ) : (
+                <div className="p-5 rounded-md bg-slate-900 ">
+                  <p className="font-bold text-md text-center text-white/80">
+                    Login to see your created links 🫥
+                  </p>
+                </div>
+              )}
+            </>
           )}
         </>
       )}

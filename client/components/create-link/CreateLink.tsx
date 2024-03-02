@@ -15,8 +15,14 @@ const CreateLink = ({
           placeholder="Enter long link here"
           className="py-2 px-3 w-full rounded-l-md focus:outline-none bg-slate-800 "
           onChange={(e) => setOriginalLink(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              handleCreateLink();
+            }
+          }}
         />
         <Button
+          onKeyUp={handleCreateLink}
           variant="outline"
           onClick={handleCreateLink}
           className="text-black px-10 rounded-r rounded-l-none"

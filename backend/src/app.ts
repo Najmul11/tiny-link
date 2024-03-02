@@ -4,8 +4,7 @@ import httpStatus from 'http-status';
 import config from './config';
 import globalErrorhandler from './app/middlewares/globalErrorHandler';
 import { routes } from './app/routes';
-import { RedirectRoutes } from './app/modules/redirect/redirect.routes';
-import { PrismaClient } from '@prisma/client';
+import { RedirectController } from './app/modules/redirect/redirect.controller';
 
 const app: Application = express();
 
@@ -17,10 +16,8 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-export const prisma = new PrismaClient();
-
 app.use('/api/v1', routes);
-app.use('/', RedirectRoutes);
+app.use('/:shortLink', RedirectController.redirectToOriginalLink);
 
 // middleware
 app.use(globalErrorhandler);

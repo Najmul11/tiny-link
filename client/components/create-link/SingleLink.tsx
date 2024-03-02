@@ -1,10 +1,20 @@
 "use client";
-import { CheckSquare2, Copy, Loader2Icon, Pencil, Trash2 } from "lucide-react";
+import {
+  CheckSquare2,
+  Copy,
+  Loader2Icon,
+  Pencil,
+  QrCode,
+  Trash2,
+} from "lucide-react";
 import Link from "next/link";
 import { Dialog, DialogTrigger } from "../ui/dialog";
 import EditDialog from "./EditDialog";
 import { useState } from "react";
 import { TLink } from "@/types/link";
+import { format } from "date-fns";
+import { CopyToClipboard } from "react-copy-to-clipboard";
+import QrDialog from "./QrDialog";
 
 type TProps = {
   link: TLink;
@@ -13,8 +23,9 @@ type TProps = {
 };
 
 const SingleLink = ({ link, handleDeleteLink, deleteLinkLoading }: TProps) => {
-  const { clicks, shortLink, id } = link;
+  const { clicks, shortLink, id, expiryDate, maxClicks } = link;
   const [showCheckmark, setShowCheckmark] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleClick = () => {
     if (!showCheckmark) {
@@ -27,8 +38,12 @@ const SingleLink = ({ link, handleDeleteLink, deleteLinkLoading }: TProps) => {
   return (
     <div className="bg-slate-900 p-5 rounded-md flex flex-col gap-2">
       <div className="flex gap-5 justify-between items-center">
-        <Link href={"/"} className="w-[]">
-          {shortLink}
+        <Link
+          target="_blank"
+          href={`${process.env.NEXT_PUBLIC_BASE_URL_REDIRECT}/${shortLink}`}
+          className="w-[]"
+        >
+          {process.env.NEXT_PUBLIC_BASE_URL_REDIRECT}/{shortLink}
         </Link>
 
         {showCheckmark ? (
@@ -36,27 +51,53 @@ const SingleLink = ({ link, handleDeleteLink, deleteLinkLoading }: TProps) => {
             <CheckSquare2 size={18} />
           </button>
         ) : (
-          <button
-            onClick={handleClick}
-            className="hover:bg-slate-800 p-2 duration-300 rounded-md"
+          <CopyToClipboard
+            text={`${process.env.NEXT_PUBLIC_BASE_URL_REDIRECT}/${shortLink}`}
+            onCopy={handleClick}
           >
-            <Copy size={18} />
-          </button>
+            <button className="hover:bg-slate-800 p-2 duration-300 rounded-md">
+              <Copy size={18} />
+            </button>
+          </CopyToClipboard>
         )}
       </div>
-      <p className="text-sm text-white/80">Clicks: {clicks}</p>
+      <div className="flex items-center gap-16">
+        <p className="text-sm text-white/80">Clicks: {clicks}</p>
+        {maxClicks && (
+          <p className="text-sm text-white/80">Max clicks: {maxClicks}</p>
+        )}
+      </div>
 
       <div className="flex items-center justify-between">
-        <span className="text-white/80 text-sm">Exp: 11 Jan,2024</span>
+        <span className="text-white/80 text-sm">
+          Exp: {expiryDate ? format(expiryDate, "PPP") : ""}
+        </span>
+
+        <Dialog>
+          <DialogTrigger asChild>
+            <button className="p-2 flex items-center text-sm bg-slate-800 hover:bg-slate-700 duration-300 rounded-md">
+              <QrCode size={18} />
+              &nbsp; Show QR
+            </button>
+          </DialogTrigger>
+
+          <QrDialog shortLink={shortLink} />
+        </Dialog>
 
         <div className="flex items-center gap-2">
-          <Dialog>
+          <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
               <button className="p-2  hover:bg-slate-700 duration-300 rounded-md">
                 <Pencil size={18} />
               </button>
             </DialogTrigger>
-            <EditDialog />
+            <EditDialog
+              maxClicks={maxClicks}
+              tinyLink={shortLink}
+              id={id}
+              open={open}
+              setOpen={setOpen}
+            />
           </Dialog>
 
           {deleteLinkLoading[`${id}`] ? (

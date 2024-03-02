@@ -28,7 +28,22 @@ const deleteLink = catchAsyncError(async (req: Request, res: Response) => {
   });
 });
 
+const customizeLink = catchAsyncError(async (req: Request, res: Response) => {
+  const result = await LinkService.customizeLink(
+    req.body,
+    Number(req.params.id),
+  );
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Link customization successful',
+    data: result,
+  });
+});
+
 export const LinkController = {
   createLink,
   deleteLink,
+  customizeLink,
 };
