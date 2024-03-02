@@ -1,11 +1,20 @@
 "use client";
-import { CheckSquare2, Copy, Loader2Icon, Pencil, Trash2 } from "lucide-react";
+import {
+  CheckSquare2,
+  Copy,
+  Loader2Icon,
+  Pencil,
+  QrCode,
+  Trash2,
+} from "lucide-react";
 import Link from "next/link";
 import { Dialog, DialogTrigger } from "../ui/dialog";
 import EditDialog from "./EditDialog";
 import { useState } from "react";
 import { TLink } from "@/types/link";
 import { format } from "date-fns";
+import { CopyToClipboard } from "react-copy-to-clipboard";
+import QrDialog from "./QrDialog";
 
 type TProps = {
   link: TLink;
@@ -42,12 +51,14 @@ const SingleLink = ({ link, handleDeleteLink, deleteLinkLoading }: TProps) => {
             <CheckSquare2 size={18} />
           </button>
         ) : (
-          <button
-            onClick={handleClick}
-            className="hover:bg-slate-800 p-2 duration-300 rounded-md"
+          <CopyToClipboard
+            text={`${process.env.NEXT_PUBLIC_BASE_URL_REDIRECT}/${shortLink}`}
+            onCopy={handleClick}
           >
-            <Copy size={18} />
-          </button>
+            <button className="hover:bg-slate-800 p-2 duration-300 rounded-md">
+              <Copy size={18} />
+            </button>
+          </CopyToClipboard>
         )}
       </div>
       <p className="text-sm text-white/80">Clicks: {clicks}</p>
@@ -56,6 +67,17 @@ const SingleLink = ({ link, handleDeleteLink, deleteLinkLoading }: TProps) => {
         <span className="text-white/80 text-sm">
           Exp: {expiryDate ? format(expiryDate, "PPP") : ""}
         </span>
+
+        <Dialog>
+          <DialogTrigger asChild>
+            <button className="p-2 flex items-center text-sm bg-slate-800 hover:bg-slate-700 duration-300 rounded-md">
+              <QrCode size={18} />
+              &nbsp; Show QR
+            </button>
+          </DialogTrigger>
+
+          <QrDialog shortLink={shortLink} />
+        </Dialog>
 
         <div className="flex items-center gap-2">
           <Dialog open={open} onOpenChange={setOpen}>
