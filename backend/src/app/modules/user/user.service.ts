@@ -1,7 +1,8 @@
 import httpStatus from 'http-status';
 import ApiError from '../../../errors/ApiError';
-import { prisma } from '../../../app';
-import { user } from '@prisma/client';
+import { PrismaClient, user } from '@prisma/client';
+
+const prisma = new PrismaClient();
 
 const createUser = async ({ email, name }: user) => {
   if (!email || !name)

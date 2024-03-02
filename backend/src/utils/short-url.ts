@@ -1,4 +1,5 @@
-import { prisma } from '../app';
+import { PrismaClient } from '@prisma/client';
+const prisma = new PrismaClient();
 
 const generateTinyLink = () => {
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';

@@ -2,8 +2,10 @@
 import { TLink } from './links.interface';
 import ApiError from '../../../errors/ApiError';
 import httpStatus from 'http-status';
-import { prisma } from '../../../app';
+import { PrismaClient } from '@prisma/client';
 import { generateUniqueShortLink } from '../../../utils/short-url';
+
+const prisma = new PrismaClient();
 
 const createLink = async (payload: TLink) => {
   const { originalLink, email } = payload;

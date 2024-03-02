@@ -4,8 +4,6 @@ import { ErrorRequestHandler, NextFunction, Request, Response } from 'express';
 import config from '../../config';
 import { IGenericErrorMessage } from '../../interfaces/error';
 import ApiError from '../../errors/ApiError';
-import handleValidationError from '../../errors/handleValidationError';
-import handleCastError from '../../errors/handleCastError';
 
 const globalErrorhandler: ErrorRequestHandler = (
   error,
@@ -19,17 +17,7 @@ const globalErrorhandler: ErrorRequestHandler = (
   let message = 'Something went wrong';
   let errorMessages: IGenericErrorMessage[] = [];
 
-  if (error?.name === 'validationError') {
-    const simplifiedError = handleValidationError(error);
-    statusCode = simplifiedError.statusCode;
-    message = simplifiedError.message;
-    errorMessages = simplifiedError.errorMessages;
-  } else if (error?.name === 'CastError') {
-    const simplifiedError = handleCastError(error);
-    statusCode = simplifiedError.statusCode;
-    message = simplifiedError.message;
-    errorMessages = simplifiedError.errorMessages;
-  } else if (error instanceof ApiError) {
+  if (error instanceof ApiError) {
     statusCode = error?.statusCode;
     message = error?.message;
     errorMessages = error?.message

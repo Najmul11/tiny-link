@@ -1,4 +1,5 @@
-import { prisma } from '../../../app';
+import { PrismaClient } from '@prisma/client';
+const prisma = new PrismaClient();
 
 const redirectToOriginalLink = async (shortLink: string) => {
   const link = await prisma.link.findUnique({ where: { shortLink } });
