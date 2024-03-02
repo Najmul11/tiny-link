@@ -3,4 +3,5 @@ export type TLink = {
   originalLink: string;
   expiryDate: Date;
   shortLink: string;
+  maxClicks: number;
 };

@@ -23,7 +23,7 @@ type TProps = {
 };
 
 const SingleLink = ({ link, handleDeleteLink, deleteLinkLoading }: TProps) => {
-  const { clicks, shortLink, id, expiryDate } = link;
+  const { clicks, shortLink, id, expiryDate, maxClicks } = link;
   const [showCheckmark, setShowCheckmark] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -61,7 +61,12 @@ const SingleLink = ({ link, handleDeleteLink, deleteLinkLoading }: TProps) => {
           </CopyToClipboard>
         )}
       </div>
-      <p className="text-sm text-white/80">Clicks: {clicks}</p>
+      <div className="flex items-center gap-16">
+        <p className="text-sm text-white/80">Clicks: {clicks}</p>
+        {maxClicks && (
+          <p className="text-sm text-white/80">Max clicks: {maxClicks}</p>
+        )}
+      </div>
 
       <div className="flex items-center justify-between">
         <span className="text-white/80 text-sm">
@@ -87,6 +92,7 @@ const SingleLink = ({ link, handleDeleteLink, deleteLinkLoading }: TProps) => {
               </button>
             </DialogTrigger>
             <EditDialog
+              maxClicks={maxClicks}
               tinyLink={shortLink}
               id={id}
               open={open}

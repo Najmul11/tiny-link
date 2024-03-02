@@ -5,4 +5,5 @@ export type TDialog = {
   id: number;
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
+  maxClicks: any;
 };

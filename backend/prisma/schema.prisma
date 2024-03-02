@@ -20,6 +20,7 @@ model Link {
   originalLink String
   shortLink    String   @unique
   clicks       Int      @default(0)
+  maxClicks    Int?
   user         user?    @relation(fields: [userId], references: [id])
   userId       Int?
   expiryDate   DateTime @default(dbgenerated("now() + interval '10 days'"))

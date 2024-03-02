@@ -14,9 +14,10 @@ import { useCustomizeLinkMutation } from "@/redux/api/apiSlice";
 import { Loader2Icon } from "lucide-react";
 import { TDialog } from "@/types/dialog";
 
-const EditDialog = ({ tinyLink, id, open, setOpen }: TDialog) => {
+const EditDialog = ({ tinyLink, id, setOpen, maxClicks }: TDialog) => {
   const [date, setDate] = useState<Date>();
   const [customLink, setCustomLink] = useState<string>(tinyLink ?? "");
+  const [maximumClicks, setMaximumClicks] = useState<number>(maxClicks);
 
   const [customizeLink, { isLoading }] = useCustomizeLinkMutation();
 
@@ -36,7 +37,12 @@ const EditDialog = ({ tinyLink, id, open, setOpen }: TDialog) => {
 
     const res = (await customizeLink({
       id,
-      data: { shortLink: customLink, expiryDate: date },
+      data: {
+        shortLink: customLink,
+        expiryDate: date,
+        maxClicks: maximumClicks,
+        id,
+      },
     })) as any;
 
     if (res.data) {
@@ -70,6 +76,16 @@ const EditDialog = ({ tinyLink, id, open, setOpen }: TDialog) => {
               value={customLink ? customLink : tinyLink}
               onChange={(e) => setCustomLink(e.target.value)}
               type="text "
+              className="border focus:outline-none py-2 px-3 text-black rounded-md"
+            />
+          </div>
+          <div className="flex flex-col gap-2">
+            <label htmlFor="">Max clicks</label>
+            <input
+              defaultValue={maxClicks}
+              onChange={(e) => setMaximumClicks(Number(e.target.value))}
+              placeholder="maximum nuber of clicks"
+              type="number"
               className="border focus:outline-none py-2 px-3 text-black rounded-md"
             />
           </div>

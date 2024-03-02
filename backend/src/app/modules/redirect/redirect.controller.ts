@@ -13,7 +13,7 @@ const redirectToOriginalLink = catchAsyncError(
     if (result) {
       res.status(301).redirect(result);
     } else {
-      res.status(400).redirect(`${config.frontend_url} ${shortLink}`);
+      res.status(400).redirect(`${config.frontend_url}/${shortLink}`);
     }
   },
 );

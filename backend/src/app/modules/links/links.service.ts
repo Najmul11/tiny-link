@@ -39,14 +39,11 @@ const deleteLink = async (id: number) => {
 };
 
 const customizeLink = async (payload: Partial<TLink>, id: number) => {
-  const { shortLink, expiryDate } = payload;
+  const { shortLink, expiryDate, maxClicks } = payload;
 
   const existingShortLink = await prisma.link.findUnique({
     where: { shortLink },
   });
-
-  if (existingShortLink)
-    throw new ApiError(httpStatus.BAD_REQUEST, 'Link already in use.🫥🫥🫥');
 
   const existingLink = await prisma.link.findUnique({
     where: { id },
@@ -55,11 +52,19 @@ const customizeLink = async (payload: Partial<TLink>, id: number) => {
   if (!existingLink)
     throw new ApiError(httpStatus.BAD_REQUEST, 'No Link Found');
 
+  if (
+    existingShortLink &&
+    existingShortLink?.shortLink !== existingLink.shortLink
+  ) {
+    throw new ApiError(httpStatus.BAD_REQUEST, 'Link already in use.🫥🫥🫥');
+  }
+
   const result = await prisma.link.update({
     where: { id },
     data: {
       shortLink: shortLink ? shortLink : existingLink.shortLink,
       expiryDate: expiryDate ? expiryDate : existingLink.expiryDate,
+      maxClicks: maxClicks ? maxClicks : existingLink.maxClicks,
     },
   });
 

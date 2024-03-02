@@ -36,7 +36,7 @@ const AllLinks = () => {
 
     setDeleteLinkMap({ [id]: deleteLinkLoading });
 
-    if (res.data.success) {
+    if (res?.data?.success) {
       toast({
         description: (
           <span>
