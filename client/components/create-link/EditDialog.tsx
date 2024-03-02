@@ -1,3 +1,4 @@
+"use client";
 import {
   DialogContent,
   DialogDescription,
@@ -6,8 +7,12 @@ import {
 } from "@/components/ui/dialog";
 import { DatePicker } from "../ui/DatePicker";
 import { Button } from "../ui/button";
+import { useState } from "react";
 
-const EditDialog = () => {
+const EditDialog = ({ tinyLink }: { tinyLink: string }) => {
+  const [date, setDate] = useState<Date>();
+
+  const [customLink, setCustomLink] = useState<string>("");
   return (
     <DialogContent className="bg-transparent border-0 bg-white">
       <DialogHeader className=" ">
@@ -16,13 +21,16 @@ const EditDialog = () => {
           <div className="flex flex-col gap-2">
             <label htmlFor="">Custom link</label>
             <input
+              placeholder="type only Tiny part of link"
+              value={tinyLink}
+              onChange={(e) => setCustomLink(e.target.value)}
               type="text "
               className="border focus:outline-none py-2 px-3 text-black rounded-md"
             />
           </div>
           <div className="flex flex-col gap-2">
             <label htmlFor="">Set expiry date</label>
-            <DatePicker />
+            <DatePicker date={date} setDate={setDate} />
           </div>
           <div className="flex justify-between items-center">
             <Button variant={"ghost"} className="hover:bg-red-200 text-red-500">

@@ -28,7 +28,6 @@ const createLink = async (payload: TLink) => {
       userId: userExist.id,
     },
   });
-  console.log(result);
 
   return result;
 };
