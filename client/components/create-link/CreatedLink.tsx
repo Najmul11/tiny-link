@@ -17,7 +17,7 @@ const CreatedLink = ({ shortLink }: { shortLink: string }) => {
     <>
       <div className="flex gap-10 items-center justify-center">
         <p>
-          {process.env.NEXT_PUBLIC_BASE_URL_FRONTEND}/{shortLink}
+          {process.env.NEXT_PUBLIC_BASE_URL_REDIRECT}/{shortLink}
         </p>
 
         {showCheckmark ? (
