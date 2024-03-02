@@ -1,11 +1,9 @@
 /* eslint-disable no-console */
-import { PrismaClient } from '@prisma/client';
-import { shortUrlHelper } from '../../../utils/short-url';
 import { TLink } from './links.interface';
 import ApiError from '../../../errors/ApiError';
 import httpStatus from 'http-status';
-
-const prisma = new PrismaClient();
+import { prisma } from '../../../app';
+import { generateUniqueShortLink } from '../../../utils/short-url';
 
 const createLink = async (payload: TLink) => {
   const { originalLink, email } = payload;
@@ -13,13 +11,7 @@ const createLink = async (payload: TLink) => {
   const userExist = await prisma.user.findUnique({ where: { email } });
   if (!userExist) throw new ApiError(httpStatus.NOT_FOUND, 'Invalid user');
 
-  const lastLink = await prisma.link.findFirst({
-    orderBy: {
-      createdAt: 'desc',
-    },
-  });
-
-  const shortLink = shortUrlHelper(lastLink?.shortLink ?? 'short-url-0');
+  const shortLink = await generateUniqueShortLink();
 
   const result = await prisma.link.create({
     data: {

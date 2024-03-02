@@ -6,7 +6,7 @@ import { redirect, useParams } from "next/navigation";
 
 const Page = () => {
   const params = useParams();
-  const { data, isLoading, isError, error } = useRedirectToOriginalLinkQuery(
+  const { data, isLoading, isError } = useRedirectToOriginalLinkQuery(
     params?.tinyLink
   );
 

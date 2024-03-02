@@ -29,8 +29,12 @@ const SingleLink = ({ link, handleDeleteLink, deleteLinkLoading }: TProps) => {
   return (
     <div className="bg-slate-900 p-5 rounded-md flex flex-col gap-2">
       <div className="flex gap-5 justify-between items-center">
-        <Link href={"/"} className="w-[]">
-          {shortLink}
+        <Link
+          target="_blank"
+          href={`${process.env.NEXT_PUBLIC_BASE_URL_FRONTEND}/${shortLink}`}
+          className="w-[]"
+        >
+          {process.env.NEXT_PUBLIC_BASE_URL_FRONTEND}/{shortLink}
         </Link>
 
         {showCheckmark ? (

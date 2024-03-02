@@ -16,7 +16,9 @@ const CreatedLink = ({ shortLink }: { shortLink: string }) => {
   return (
     <>
       <div className="flex gap-10 items-center justify-center">
-        <p>{shortLink}</p>
+        <p>
+          {process.env.NEXT_PUBLIC_BASE_URL_FRONTEND}/{shortLink}
+        </p>
 
         {showCheckmark ? (
           <button className="hover:bg-slate-800 p-2 duration-300 rounded-md">
