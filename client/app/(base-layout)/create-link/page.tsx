@@ -3,7 +3,6 @@ import AllLinks from "@/components/create-link/AllLinks";
 import CreateLink from "@/components/create-link/CreateLink";
 import CreatedLink from "@/components/create-link/CreatedLink";
 import { ShortLinkSkeleton } from "@/components/create-link/LinkSkeleton";
-import PrivateRoute from "@/components/router/PrivateRoute";
 import { useToast } from "@/components/ui/use-toast";
 import { isValidURL } from "@/lib/isValid-url";
 import { useCreateLinkMutation } from "@/redux/api/apiSlice";
@@ -53,31 +52,29 @@ const CreateLinkPage = () => {
   };
 
   return (
-    <PrivateRoute>
-      <div className="max-w-screen-xl px-4 xl:px-[unset] mx-auto mt-[10vh]">
-        <div className="grid grid-cols-5 gap-5">
-          <div className="col-span-5 lg:col-span-3 flex flex-col gap-10">
-            <CreateLink
-              originalLink={originalLink}
-              handleCreateLink={handleCreateLink}
-              setOriginalLink={setOriginalLink}
-            />
+    <div className="max-w-screen-xl px-4 xl:px-[unset] mx-auto mt-[10vh]">
+      <div className="grid grid-cols-5 gap-5">
+        <div className="col-span-5 lg:col-span-3 flex flex-col gap-10">
+          <CreateLink
+            originalLink={originalLink}
+            handleCreateLink={handleCreateLink}
+            setOriginalLink={setOriginalLink}
+          />
 
-            {isLoading ? (
-              <div className="w-72 mx-auto">
-                <ShortLinkSkeleton />
-              </div>
-            ) : (
-              <>{shortLink && <CreatedLink shortLink={shortLink} />}</>
-            )}
-          </div>
+          {isLoading ? (
+            <div className="w-72 mx-auto">
+              <ShortLinkSkeleton />
+            </div>
+          ) : (
+            <>{shortLink && <CreatedLink shortLink={shortLink} />}</>
+          )}
+        </div>
 
-          <div className="col-span-5 lg:col-span-2">
-            <AllLinks />
-          </div>
+        <div className="col-span-5 lg:col-span-2">
+          <AllLinks />
         </div>
       </div>
-    </PrivateRoute>
+    </div>
   );
 };
 

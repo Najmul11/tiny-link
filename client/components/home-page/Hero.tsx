@@ -24,32 +24,17 @@ const Hero = () => {
           Experience the speed of link shortening with Tiny Link&apos;s
           one-click paste and copy feature. Swift, simple, and efficient!
         </p>
-        {session ? (
-          <Link href={"/create-link"}>
-            <Button
-              borderRadius="0.5rem"
-              duration={8000}
-              containerClassName="h-12 w-72 mt-3 hover:scale-105 duration-300"
-              className="   bg-slate-900 text-white/80 "
-            >
-              Start Shortening for free
-            </Button>
-          </Link>
-        ) : (
-          <Dialog>
-            <DialogTrigger asChild>
-              <Button
-                borderRadius="0.5rem"
-                duration={8000}
-                containerClassName="h-12 w-72 mt-3 hover:scale-105 duration-300"
-                className="   bg-slate-900 text-white/80 "
-              >
-                Start Shortening for free
-              </Button>
-            </DialogTrigger>
-            <AuthDialog />
-          </Dialog>
-        )}
+
+        <Link href={"/create-link"}>
+          <Button
+            borderRadius="0.5rem"
+            duration={8000}
+            containerClassName="h-12 w-72 mt-3 hover:scale-105 duration-300"
+            className="   bg-slate-900 text-white/80 "
+          >
+            Start Shortening for free
+          </Button>
+        </Link>
       </div>
     </div>
   );

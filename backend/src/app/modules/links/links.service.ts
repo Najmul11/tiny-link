@@ -8,8 +8,11 @@ import { generateUniqueShortLink } from '../../../utils/short-url';
 const createLink = async (payload: TLink) => {
   const { originalLink, email } = payload;
 
-  const userExist = await prisma.user.findUnique({ where: { email } });
-  if (!userExist) throw new ApiError(httpStatus.NOT_FOUND, 'Invalid user');
+  let userExist;
+
+  if (email) {
+    userExist = await prisma.user.findUnique({ where: { email } });
+  }
 
   const shortLink = await generateUniqueShortLink();
 
@@ -17,7 +20,7 @@ const createLink = async (payload: TLink) => {
     data: {
       originalLink,
       shortLink,
-      userId: userExist.id,
+      userId: userExist ? userExist!.id : null,
     },
   });
 
