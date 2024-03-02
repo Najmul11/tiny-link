@@ -11,21 +11,21 @@ import { Button } from "../ui/button";
 import { useState } from "react";
 import { toast } from "../ui/use-toast";
 import { useCustomizeLinkMutation } from "@/redux/api/apiSlice";
-import { Loader2Icon } from "lucide-react";
+import { AlertCircle, Loader2Icon } from "lucide-react";
 import { TDialog } from "@/types/dialog";
 
 const EditDialog = ({ tinyLink, id, setOpen, maxClicks }: TDialog) => {
   const [date, setDate] = useState<Date>();
-  const [customLink, setCustomLink] = useState<string>(tinyLink ?? "");
+  const [customLink, setCustomLink] = useState<string>("");
   const [maximumClicks, setMaximumClicks] = useState<number>(maxClicks);
 
   const [customizeLink, { isLoading }] = useCustomizeLinkMutation();
 
   const handleSave = async () => {
-    if (!date && !customLink) {
+    if (!date && !customLink && !maximumClicks) {
       return toast({
         variant: "destructive",
-        description: "Failed🫥🫥🫥,both field can't be empty.",
+        description: "Failed🫥🫥🫥,all fields can't be empty.",
       });
     }
     if (customLink.length > 80) {
@@ -70,10 +70,16 @@ const EditDialog = ({ tinyLink, id, setOpen, maxClicks }: TDialog) => {
         <DialogTitle>Customize short link</DialogTitle>
         <DialogDescription className="flex flex-col gap-5 !mt-3">
           <div className="flex flex-col gap-2">
-            <label htmlFor="">Custom link</label>
+            <label htmlFor="" className="flex items-center gap-2">
+              Custom link{" "}
+              <span className="flex items-center text-[12px] text-red-500 font-semibold gap-1">
+                <AlertCircle size={13} className="text-red-500 " />
+                <span>This will invalidate all previous QR codes.</span>
+              </span>
+            </label>
             <input
               placeholder="type only Tiny part of link"
-              value={customLink ? customLink : tinyLink}
+              defaultValue={tinyLink}
               onChange={(e) => setCustomLink(e.target.value)}
               type="text "
               className="border focus:outline-none py-2 px-3 text-black rounded-md"
