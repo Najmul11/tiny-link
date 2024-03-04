@@ -5,11 +5,14 @@ import config from './config';
 import globalErrorhandler from './app/middlewares/globalErrorHandler';
 import { routes } from './app/routes';
 import { RedirectController } from './app/modules/redirect/redirect.controller';
+import { deleteExpireLinks } from './utils/delete-cron';
 
 const app: Application = express();
 
-app.get('/', (req: Request, res: Response) => {
-  res.send(`Tiny Link server running on PORT ${config.port}`);
+app.get('/', (req, res) => {
+  res.send(`<p>Tiny Link server running on PORT ${config.port}</p>
+  <a href="${config.frontend_url}">visit frontend</a>
+  `);
 });
 
 app.use(cors());
@@ -18,6 +21,14 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/v1', routes);
 app.use('/:shortLink', RedirectController.redirectToOriginalLink);
+
+// Run the expireLinks function periodically (e.g., once a day)
+setInterval(
+  async () => {
+    await deleteExpireLinks();
+  },
+  5 * 60 * 60 * 1000,
+); // Run every 5 hours
 
 // middleware
 app.use(globalErrorhandler);
