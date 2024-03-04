@@ -1,7 +1,6 @@
 "use client";
 import { Coffee } from "lucide-react";
 import Link from "next/link";
-import React, { useState } from "react";
 import { Meteors } from "../ui/meteors";
 
 const Footer = () => {
@@ -13,11 +12,11 @@ const Footer = () => {
           target="_blank"
           className="flex gap-2 items-center group"
         >
-          <h1 className="text-sm">Buy me a coffee </h1>
-
           <p className="  text-yellow-500 text-4xl flex justify-center items-center group-hover:scale-110 duration-300 ">
             <Coffee />
           </p>
+
+          <h1 className="text-sm">Buy me a coffee </h1>
         </Link>
 
         <p className="text-sm">© 2024. All Rights Reserved.</p>
