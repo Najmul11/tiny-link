@@ -27,8 +27,8 @@ setInterval(
   async () => {
     await deleteExpireLinks();
   },
-  24 * 60 * 60 * 1000,
-); // Run every 24 hours
+  5 * 60 * 60 * 1000,
+); // Run every 5 hours
 
 // middleware
 app.use(globalErrorhandler);

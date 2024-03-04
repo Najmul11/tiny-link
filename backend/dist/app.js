@@ -33,7 +33,7 @@ app.use('/api/v1', routes_1.routes);
 app.use('/:shortLink', redirect_controller_1.RedirectController.redirectToOriginalLink);
 setInterval(() => __awaiter(void 0, void 0, void 0, function* () {
     yield (0, delete_cron_1.deleteExpireLinks)();
-}), 24 * 60 * 60 * 1000);
+}), 5 * 60 * 60 * 1000);
 app.use(globalErrorHandler_1.default);
 app.use((req, res, next) => {
     res.status(http_status_1.default.NOT_FOUND).json({
