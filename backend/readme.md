@@ -11,15 +11,17 @@
 **Frontend Repository**: https://github.com/Najmul11/tiny-link/tree/main/client
 **Backend Repository**: https://github.com/Najmul11/tiny-link/tree/main/backend
 
-### Library and tools used in frontend
+### Library and tools used in backend
 
-**Library**: `Next js`
+**Server**: `Node js`, `Express js`
 
-**UI and styling**: `ShadCn`, `Tailwind CSS`
+**Database**: `PostgreSQL`
 
-**Type Safety**: `TypeScript`
+**Type Safety and validation**: `TypeScript`
 
-**Icon Library**: `React Icons`
+**Authentication and authorization**: `jsonwebtoken`, `bcrypt`
+
+**Linting and prettifying**: `ESLint`, `Prettier`
 
 **Follow package.json for more scripts**
 

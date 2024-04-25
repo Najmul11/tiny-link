@@ -1,6 +1,6 @@
 # Tiny Link
 
-![TinyLink](../tinylink.png)
+![TinyLink](./tinylink.png)
 
 ### It's a fullstack application using PERN stack application.
 
@@ -20,6 +20,25 @@
 **Type Safety**: `TypeScript`
 
 **Icon Library**: `React Icons`
+
+### Library and tools used in backend
+
+**Server**: `Node js`, `Express js`
+
+**Database**: `PostgreSQL`
+
+**Type Safety and validation**: `TypeScript`
+
+**Authentication and authorization**: `jsonwebtoken`, `bcrypt`
+
+**Linting and prettifying**: `ESLint`, `Prettier`
+
+### Features
+
+- [x] Tiny Link provides a sleek platform for managing and sharing long URLs.
+- [x] Created powerful tools like link shortening, expiration dates, click limits, and view tracking, giving users full
+      control over shared links.
+- [x] Integrated QR code functionality to simplify access to shared links.
 
 **Follow package.json for more scripts**
 
