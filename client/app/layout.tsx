@@ -10,8 +10,7 @@ import { Toaster } from "@/components/ui/toaster";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Tiny Link",
-  description: "Now shortening long links becomes easier!",
+  title: "Shortyy - Shorten your links",
 };
 
 export default function RootLayout({

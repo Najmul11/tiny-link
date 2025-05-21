@@ -13,7 +13,7 @@ const AuthDialog = () => {
   return (
     <DialogContent>
       <DialogHeader>
-        <DialogTitle>Login to create Tiny Link🚀</DialogTitle>
+        <DialogTitle>Login 🚀</DialogTitle>
         <DialogDescription className="flex flex-col gap-5 !mt-10">
           <button
             className="flex items-center gap-5 bg-slate-800 hover:bg-slate-900 duration-300 text-white py-2 justify-center rounded"

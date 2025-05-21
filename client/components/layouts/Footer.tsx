@@ -19,7 +19,9 @@ const Footer = () => {
           <h1 className="text-sm">Buy me a coffee </h1>
         </Link>
 
-        <p className="text-sm">© 2024. All Rights Reserved.</p>
+        <p className="text-sm">
+          © {new Date().getFullYear()}. All Rights Reserved.
+        </p>
       </div>
       <Meteors number={20} />
     </div>

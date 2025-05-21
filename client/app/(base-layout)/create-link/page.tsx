@@ -35,7 +35,7 @@ const CreateLinkPage = () => {
       toast({
         description: (
           <span>
-            Yay🎯Tiny Link is <span className="text-green-500">ready</span>
+            Yay🎯 your link is <span className="text-green-500">ready</span>
           </span>
         ),
       });
