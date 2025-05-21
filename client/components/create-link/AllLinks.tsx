@@ -40,7 +40,7 @@ const AllLinks = () => {
       toast({
         description: (
           <span>
-            Tiny Link is <span className="text-red-500">deleted.</span>
+            Link is <span className="text-red-500">deleted.</span>
           </span>
         ),
       });
@@ -78,7 +78,7 @@ const AllLinks = () => {
               {session ? (
                 <div className="p-5 rounded-md bg-slate-900 ">
                   <p className="font-bold text-md text-center text-white/80">
-                    You haven&apos;t created any tiny link yet 🫥
+                    You haven&apos;t created any shortyy yet 🫥
                   </p>
                 </div>
               ) : (

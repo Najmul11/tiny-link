@@ -21,8 +21,8 @@ const Hero = () => {
           More than just shorter links
         </p>
         <p className="text-sm mt-3 text-white/80 w-96 lg:w-[unset] xl:w-[70%] mx-auto">
-          Experience the speed of link shortening with Tiny Link&apos;s
-          one-click paste and copy feature. Swift, simple, and efficient!
+          Experience the speed of link shortening with Shortyy&apos;s one-click
+          paste and copy feature. Swift, simple, and efficient!
         </p>
 
         <Link href={"/create-link"}>

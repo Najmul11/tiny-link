@@ -31,7 +31,7 @@ const EditDialog = ({ tinyLink, id, setOpen, maxClicks }: TDialog) => {
     if (customLink.length > 80) {
       return toast({
         variant: "destructive",
-        description: "Failed🫥🫥🫥,tiny link is so long.",
+        description: "Failed🫥🫥🫥, link is so long.",
       });
     }
 
@@ -78,7 +78,7 @@ const EditDialog = ({ tinyLink, id, setOpen, maxClicks }: TDialog) => {
               </span>
             </label>
             <input
-              placeholder="type only Tiny part of link"
+              placeholder="type your custom link"
               defaultValue={tinyLink}
               onChange={(e) => setCustomLink(e.target.value)}
               type="text "

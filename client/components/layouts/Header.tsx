@@ -34,7 +34,7 @@ const Header = () => {
           {/* left */}
           <div className="flex gap-10 items-center">
             <Link href={"/"} className="font-bold text-2xl">
-              TINY LINK
+              SHORTYY
             </Link>
           </div>
 
